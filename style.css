@@ -7,8 +7,10 @@
 
 /* —— body + fonts —— */
 body {
-  font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  color: #333;
+  /* Primary body fonts requested: Helvetica Now Display W05 (Reg/Lt/Bd) */
+  font-family: "Helvetica Now Display W05 Reg", "Helvetica Now Display W05 Lt", "Helvetica Now Display W05 Bd", "Helvetica", "Helvetica Neue", Arial, sans-serif;
+  color: rgb(0,0,0); /* black text */
+  background: rgb(255,255,255); /* white page background */
   display: flex;
   justify-content: center;
 }
@@ -20,14 +22,24 @@ body {
 
 /* header */
 .site-header {
-  text-align: center;
-  padding-top: 50px;
+  padding-top: 48px;
+  padding-bottom: 8px;
+}
+
+.site-image {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 12px;
 }
 
 .site-title {
-  font-size: 22px;
-  font-weight: 500;
-  margin-bottom: 10px;
+  /* Header font: Bauer Bodoni W02 Bold (with fallbacks) */
+  font-family: "Bauer Bodoni W02 Bold", "Bauer Bodoni W02", Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: 28px;
+  color: rgb(0,0,0);
+  letter-spacing: 0.6px;
+  margin-bottom: 6px;
 }
 
 /* chat window */
@@ -37,27 +49,35 @@ body {
 
 .chat-window {
   height: 360px;
-  border: 1px solid #000;
+  border: 1px solid rgb(227,166,53); /* gold border accent */
   padding: 20px;
   font-size: 18px;
   line-height: 1.5;
   overflow-y: auto;
-  background: #fafafa;
+  background: rgb(255,255,255); /* keep chat area white */
   white-space: pre-line;
+  border-radius: 4px;
 }
 
 /* messages */
 .msg {
   margin-bottom: 14px;
   line-height: 1.5;
+  padding: 8px 12px;
+  border-radius: 3px;
 }
 
 .msg.user {
-  color: #000;
+  color: rgb(0,0,0);
+  /* user messages are emphasized with the brand red on the left */
+  border-left: 4px solid rgb(255,0,59);
+  background: rgb(255,255,255);
 }
 
 .msg.ai {
-  color: #666666;
+  color: rgb(0,0,0);
+  border-left: 4px solid rgb(227,166,53); /* gold for AI/system */
+  background: rgb(255,255,255);
 }
 
 /* input row */
@@ -69,29 +89,32 @@ body {
 
 .chat-form input {
   flex: 1;
-  padding: 12px;
-  border: 1px solid #ccc;
+  padding: 12px 14px;
+  border: 2px solid rgb(0,0,0);
   font-size: 18px;
+  font-family: "Helvetica Now Display W05 Reg", "Helvetica", Arial, sans-serif;
+  color: rgb(0,0,0);
+  background: rgb(255,255,255);
 }
 
 .chat-form input:focus {
-  outline: 2px solid #000;
+  outline: 3px solid rgb(227,166,53); /* gold focus */
   outline-offset: 2px;
 }
 
 .chat-form button {
   font-size: 18px;
-  background: #000;
-  color: #fff;
-  border: none;
+  background: rgb(255,0,59); /* brand red */
+  color: rgb(255,255,255); /* white icon */
+  border: 2px solid rgb(255,0,59);
   padding: 12px;
-  width: 48px;
+  width: 52px;
   height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 160ms ease-in-out, border-color 160ms ease-in-out;
 }
 
 .chat-form button .material-icons {
@@ -99,11 +122,13 @@ body {
 }
 
 .chat-form button:hover {
-  background: #666666;
+  background: rgb(0,0,0); /* invert to black on hover */
+  border-color: rgb(0,0,0);
+  color: rgb(255,255,255);
 }
 
 .chat-form button:focus {
-  outline: 2px solid #000;
+  outline: 3px solid rgb(227,166,53);
   outline-offset: 2px;
 }
 
@@ -125,7 +150,7 @@ body {
   margin: 60px 0 40px;
   text-align: center;
   font-size: 14px;
-  color: #666;
+  color: rgb(0,0,0);
 }
 
 .site-footer nav {
@@ -134,10 +159,62 @@ body {
 
 .site-footer a {
   margin: 0 8px;
-  color: #000;
+  color: rgb(0,0,0);
   text-decoration: none;
 }
 
 .site-footer a:hover {
-  color: #666666;
+  color: rgb(255,0,59);
+}
+
+/* —— chat bubbles —— */
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 8px;
+}
+
+/* generic bubble base for compatibility with different JS class names */
+.user-msg,
+.bot-msg,
+.msg.user,
+.msg.ai {
+  display: inline-block;
+  max-width: 78%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-family: "Helvetica Now Display W05 Reg", "Helvetica Now Display W05 Lt", "Helvetica Now Display W05 Bd", "Helvetica", Arial, sans-serif;
+  font-size: 16px;
+  color: rgb(0,0,0);
+  background: rgb(255,255,255);
+  word-wrap: break-word;
+}
+
+.user-msg,
+.msg.user {
+  margin-left: auto; /* align to the right */
+  border: 2px solid rgb(255,0,59); /* red accent */
+  border-top-right-radius: 6px;
+  text-align: right;
+}
+
+.bot-msg,
+.msg.ai {
+  margin-right: auto; /* align to the left */
+  border: 2px solid rgb(227,166,53); /* gold accent */
+  border-top-left-radius: 6px;
+  text-align: left;
+}
+
+/* small responsive tweak */
+@media (max-width: 420px) {
+  .user-msg,
+  .bot-msg,
+  .msg.user,
+  .msg.ai {
+    max-width: 92%;
+    padding: 10px 12px;
+    font-size: 15px;
+  }
 }
